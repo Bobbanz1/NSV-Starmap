@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="assets/vendor/jquery.min.js"></script>
+    <script src="assets/vendor/jsrender.min.js"></script>
+    <script src="assets/vendor/lozad.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/test.js"></script>
+    <script id="node-template" type="text/x-jsrender">
+        {{if sector == "1"}}
+            <div id="{{:name}}" class="star_marker_{{:alignment}}">
+                <span class="star_label">
+                    <p>{{:name}}</p>
+                </span>    
+            </div>
+        {{else}}
+        {{/if}}
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="outerbg">
+        <div class="outerbgdradis"></div>
+    </div>
+</body>
+</html>
