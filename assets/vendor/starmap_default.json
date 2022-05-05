@@ -147,7 +147,7 @@
 	  "system_type": "[]",
 	  "system_traits": 0,
 	  "is_capital": 0,
-	  "adjacency_list": "[\"Sirius\",\"Sol\",\"Wolf 359\",\"Lalande 21185\"]",
+	  "adjacency_list": "[\"Sirius\",\"Sol\",\"Lalande 21185\"]",
 	  "wormhole_connections": "[]",
 	  "fleet_type": null,
 	  "x": 25,

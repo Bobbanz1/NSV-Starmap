@@ -9,8 +9,28 @@
     <script src="assets/vendor/lozad.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/test.js"></script>
-    <script id="node-template" type="text/x-jsrender">
+    <script id="sector1" type="text/x-jsrender">
         {{if sector == "1"}}
+            <div id="{{:name}}" class="star_marker_{{:alignment}}">
+                <span class="star_label">
+                    <p>{{:name}}</p>
+                </span>    
+            </div>
+        {{else}}
+        {{/if}}
+    </script>
+    <script id="sector2" type="text/x-jsrender">
+        {{if sector == "2"}}
+            <div id="{{:name}}" class="star_marker_{{:alignment}}">
+                <span class="star_label">
+                    <p>{{:name}}</p>
+                </span>    
+            </div>
+        {{else}}
+        {{/if}}
+    </script>
+    <script id="sector3" type="text/x-jsrender">
+        {{if sector == "3"}}
             <div id="{{:name}}" class="star_marker_{{:alignment}}">
                 <span class="star_label">
                     <p>{{:name}}</p>
@@ -23,7 +43,12 @@
 </head>
 <body>
     <div class="outerbg">
-        <div class="outerbgdradis"></div>
-    </div>
+        <div class="topnav">
+            <button onclick="load1()">Sector One</button>
+            <button onclick="load2()">Sector Two</button>
+            <button onclick="load3()">Sector Three</button>
+        </div>
+        <div id="outerbgdradis" class="outerbgdradis"></div>
+    </div>    
 </body>
 </html>
