@@ -1,4 +1,6 @@
-var starmap_path = 'assets/vendor/starmap_default.json'
+var starmap_path = 'assets/vendor/starmap_default.json';
+var sectorNumber = "1";
+var _systems;
 
 $(document).ready(function(){
     load1();
@@ -6,27 +8,24 @@ $(document).ready(function(){
 
 function load1() {
     jQuery.getJSON(starmap_path, function(jsonData){
-        var _systems;
         _systems = jsonData;
-        var sectorNumber = "1";
+        sectorNumber = "1";
         sector(_systems, sectorNumber);
     });        
 }
 
 function load2() {
     jQuery.getJSON(starmap_path, function(jsonData){
-        var _systems;
         _systems = jsonData;
-        var sectorNumber = "2";
+        sectorNumber = "2";
         sector(_systems, sectorNumber);
     });        
 }
 
 function load3() {
     jQuery.getJSON(starmap_path, function(jsonData){
-        var _systems;
         _systems = jsonData;
-        var sectorNumber = "3";
+        sectorNumber = "3";
         sector(_systems, sectorNumber);
     });        
 }
@@ -43,16 +42,28 @@ function sector(_systems, sectorNumber) {
         var y = sys_info["y"];
         var hidden = sys_info["hidden"];
         var sector = sys_info["sector"];
-        if (sector == sectorNumber) {
-            document.getElementById(name).style.height = '1px';
-            document.getElementById(name).style.position = 'absolute';
-            document.getElementById(name).style.left = x * 12 + 'px';
-            document.getElementById(name).style.bottom = y * 12 + 'px';
-            document.getElementById(name).style.border = '1px solid #193a7a';    
-        }
+        SectorStyler(sector, sectorNumber, name, x, y)
     });    
     document.getElementById("outerbgdradis").appendChild(canvas);
     sorter(sectorNumber);
+}
+
+function SectorStyler(sector, sectorNumber, name, x, y) {
+    if (sector == sectorNumber) {
+        document.getElementById(name).style.height = '1px';
+        document.getElementById(name).style.position = 'absolute';
+        if(sectorNumber == "1") {
+            document.getElementById(name).style.left = x * 12 + 'px';
+            document.getElementById(name).style.bottom = y * 12 + 'px';
+        } else if(sectorNumber == "2") {
+            document.getElementById(name).style.left = x * 10.5 + 'px';
+            document.getElementById(name).style.bottom = y * 10.5 + 'px';
+        } else if(sectorNumber == "3") {
+            document.getElementById(name).style.left = x * 9 + 'px';
+            document.getElementById(name).style.bottom = y * 9 + 'px';
+        }
+        document.getElementById(name).style.border = '1px solid #193a7a';    
+    }
 }
 
 function sorter(sectorNumber) {
@@ -79,23 +90,6 @@ function sorter(sectorNumber) {
         }
         });
     });
-}
-
-function lineCreator(start, element, x, y, jsonData, sectorNumber) {
-    const line = document.createElement("line");
-    const temp = element;
-    line.setAttribute("id", start +"-line-"+ element);
-    document.getElementById("compat").appendChild(line);
-    var sys = document.getElementById(element);
-    let slipX = IntoX(temp, jsonData, sectorNumber);
-    var slipY = IntoY(temp, jsonData, sectorNumber);
-    var orgX = slipX;
-    var orgY = slipY;
-    var dx = orgX - x;
-    var dy = orgY - y;
-    var len = Math.sqrt(dx*dx+dy*dy);
-    var angle = (180/Math.PI) * Math.atan2(dy, dx);
-    starmap(x,y,len, line, -angle);
 }
 
 function IntoX(aser, jsonData, sector) {
@@ -132,10 +126,37 @@ function IntoY(int, jsonData, sector) {
     return cat;
 }
 
-function starmap(x, y, len, line, angle) {
-    var left = x * 12 + 'px';
-    var bottom = y * 12 + 'px';
-    var wid = len * 12 + 'px';
+function lineCreator(start, element, x, y, jsonData, sectorNumber) {
+    const line = document.createElement("line");
+    const temp = element;
+    line.setAttribute("id", start +"-line-"+ element);
+    document.getElementById("compat").appendChild(line);
+    var sys = document.getElementById(element);
+    let slipX = IntoX(temp, jsonData, sectorNumber);
+    var slipY = IntoY(temp, jsonData, sectorNumber);
+    var orgX = slipX;
+    var orgY = slipY;
+    var dx = orgX - x;
+    var dy = orgY - y;
+    var len = Math.sqrt(dx*dx+dy*dy);
+    var angle = (180/Math.PI) * Math.atan2(dy, dx);
+    LineStyler(x, y, len, line, -angle);
+}
+
+function LineStyler(x, y, len, line, angle) {
+    if(sectorNumber == "1") {
+        var left = (x * 12) + 'px';
+        var bottom = (y * 12) + 'px';
+        var wid = (len * 12) + 'px';
+    } else if(sectorNumber == "2") {
+        var left = (x * 10.5) + 'px';
+        var bottom = (y * 10.5) + 'px';
+        var wid = (len * 10.5) + 'px';
+    } else if(sectorNumber == "3") {
+        var left = (x * 9) + 'px';
+        var bottom = (y * 9) + 'px';
+        var wid = (len * 9) + 'px';
+    }
     var trans = 'rotate(' + angle + 'deg)';
     const htmlLine = "height: 1px; "
     + "position: absolute; "

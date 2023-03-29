@@ -12,6 +12,11 @@ body {
   transition: all 0.5s ease-out;
 }
 
+.topnav {
+  position: fixed;
+  z-index: 4;
+}
+
 .outerbgdradis {
   position: relative;
   width: 115vmax;
